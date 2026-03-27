@@ -1,0 +1,296 @@
+// ── Design Tokens ──────────────────────────────────────────
+:root {
+  // Backgrounds — deep night atmosphere
+  --bg-void:      #04091A;   // absolute deepest
+  --bg-deep:      #070E20;   // page background
+  --bg-surface:   #0B1528;   // card / surface
+  --bg-elevated:  #0F1D38;   // elevated elements
+  --glass:        rgba(255,255,255,0.04);
+  --glass-hover:  rgba(255,255,255,0.07);
+  --glass-border: rgba(255,255,255,0.09);
+
+  // Brand accent — electric teal
+  --accent:       #00D4B4;
+  --accent-dim:   rgba(0,212,180,0.14);
+  --accent-glow:  rgba(0,212,180,0.32);
+
+  // Status system
+  --good:         #00D4B4;
+  --good-bg:      rgba(0,212,180,0.10);
+  --good-border:  rgba(0,212,180,0.28);
+  --good-glow:    rgba(0,212,180,0.40);
+
+  --moderate:     #F5A622;
+  --moderate-bg:  rgba(245,166,34,0.10);
+  --moderate-border: rgba(245,166,34,0.28);
+  --moderate-glow:rgba(245,166,34,0.40);
+
+  --bad:          #FF4466;
+  --bad-bg:       rgba(255,68,102,0.10);
+  --bad-border:   rgba(255,68,102,0.32);
+  --bad-glow:     rgba(255,68,102,0.45);
+
+  // Text hierarchy
+  --text-bright:    #ECF4FF;
+  --text-primary:   #B0C8EC;
+  --text-secondary: rgba(176,200,236,0.58);
+  --text-muted:     rgba(176,200,236,0.35);
+
+  // Borders & shadows
+  --border:          rgba(255,255,255,0.08);
+  --shadow-card:     0 4px 28px rgba(0,0,0,0.40), 0 0 0 1px rgba(255,255,255,0.07);
+  --shadow-hover:    0 14px 44px rgba(0,0,0,0.55);
+
+  // Shape
+  --radius-card:  18px;
+  --radius-badge: 100px;
+
+  // Fonts
+  --font-thai:    'Noto Sans Thai', sans-serif;
+  --font-latin:   'Nunito', sans-serif;
+
+  // ── Angular Material MDC token overrides ──────────────
+  --mdc-elevated-card-container-color:  rgba(11, 21, 40, 0.82);
+  --mdc-outlined-card-container-color:  rgba(11, 21, 40, 0.82);
+  --mat-sidenav-container-background-color: #0B1528;
+  --mat-sidenav-content-background-color:   transparent;
+  --mat-app-background-color: #070E20;
+  --mdc-linear-progress-active-indicator-color: #00D4B4;
+  --mdc-circular-progress-active-indicator-color: #00D4B4;
+}
+
+// ── Global Reset & Base ─────────────────────────────────────
+*, *::before, *::after { box-sizing: border-box; }
+
+html, body {
+  height: 100%;
+  margin: 0;
+  padding: 0;
+  background: var(--bg-deep);
+  font-family: var(--font-thai);
+  font-size: 16px;
+  color: var(--text-primary);
+  -webkit-font-smoothing: antialiased;
+  color-scheme: dark;
+}
+
+// ── Atmospheric gradient — subtle teal/blue nebula ──────────
+body::before {
+  content: '';
+  position: fixed;
+  inset: 0;
+  background:
+    radial-gradient(ellipse 90% 55% at 15% -5%, rgba(0,212,180,0.06) 0%, transparent 60%),
+    radial-gradient(ellipse 70% 45% at 85% 105%, rgba(0,60,180,0.07) 0%, transparent 55%),
+    radial-gradient(ellipse 50% 35% at 50% 50%, rgba(0,0,60,0.12) 0%, transparent 70%);
+  pointer-events: none;
+  z-index: 0;
+}
+
+// ── Angular Material Dark Overrides ────────────────────────
+
+// Sidenav container
+.mat-drawer-container,
+.mat-sidenav-container {
+  background: transparent !important;
+  color: var(--text-primary) !important;
+}
+.mat-drawer-content,
+.mat-sidenav-content {
+  background: transparent !important;
+}
+.mat-drawer,
+.mat-sidenav {
+  background: var(--bg-surface) !important;
+  border-right: 1px solid var(--glass-border) !important;
+}
+
+// Cards — glassmorphism
+.mat-mdc-card {
+  background: rgba(11, 21, 40, 0.80) !important;
+  backdrop-filter: blur(20px) !important;
+  -webkit-backdrop-filter: blur(20px) !important;
+  border: 1px solid var(--glass-border) !important;
+  border-radius: var(--radius-card) !important;
+  color: var(--text-primary) !important;
+  box-shadow: var(--shadow-card) !important;
+}
+
+// Toolbar
+.mat-toolbar {
+  font-family: var(--font-latin) !important;
+  background: rgba(4,9,26,0.88) !important;
+  backdrop-filter: blur(24px) !important;
+  -webkit-backdrop-filter: blur(24px) !important;
+  border-bottom: 1px solid var(--glass-border) !important;
+  color: var(--text-bright) !important;
+}
+
+// Buttons
+.mat-mdc-button,
+.mat-mdc-raised-button,
+.mat-mdc-outlined-button,
+.mat-mdc-flat-button {
+  border-radius: 10px !important;
+  font-family: var(--font-thai) !important;
+  font-size: 0.9rem !important;
+}
+.mat-mdc-icon-button { color: var(--text-secondary) !important; }
+.mat-mdc-icon-button:hover { color: var(--accent) !important; background: var(--accent-dim) !important; }
+
+// Raised / primary button
+.mat-mdc-raised-button[color="primary"],
+.mat-mdc-flat-button[color="primary"] {
+  background: var(--accent) !important;
+  color: #04091A !important;
+  font-weight: 700 !important;
+}
+
+// Dialog
+.mat-mdc-dialog-container {
+  background: var(--bg-surface) !important;
+  border-radius: 20px !important;
+  border: 1px solid var(--glass-border) !important;
+  color: var(--text-primary) !important;
+}
+.mdc-dialog__surface { background: transparent !important; }
+
+// Snackbar
+.mat-mdc-snack-bar-container {
+  background: var(--bg-elevated) !important;
+  border-radius: 12px !important;
+  border: 1px solid var(--glass-border) !important;
+  color: var(--text-bright) !important;
+}
+
+// Form fields / selects
+.mat-mdc-form-field { color: var(--text-primary) !important; }
+.mat-mdc-floating-label { color: var(--text-secondary) !important; }
+.mdc-text-field--outlined:not(.mdc-text-field--disabled) .mdc-notched-outline__leading,
+.mdc-text-field--outlined:not(.mdc-text-field--disabled) .mdc-notched-outline__notch,
+.mdc-text-field--outlined:not(.mdc-text-field--disabled) .mdc-notched-outline__trailing {
+  border-color: var(--glass-border) !important;
+}
+.mdc-text-field--outlined.mdc-text-field--focused .mdc-notched-outline__leading,
+.mdc-text-field--outlined.mdc-text-field--focused .mdc-notched-outline__notch,
+.mdc-text-field--outlined.mdc-text-field--focused .mdc-notched-outline__trailing {
+  border-color: var(--accent) !important;
+}
+.mat-mdc-select-value,
+.mat-mdc-select-arrow { color: var(--text-primary) !important; }
+.mat-mdc-select-panel {
+  background: var(--bg-elevated) !important;
+  border: 1px solid var(--glass-border) !important;
+  border-radius: 12px !important;
+}
+.mat-mdc-option { color: var(--text-primary) !important; }
+.mat-mdc-option:hover:not(.mat-mdc-option-disabled),
+.mat-mdc-option.mat-mdc-option-active { background: var(--glass-hover) !important; }
+.mat-mdc-option.mdc-list-item--selected { color: var(--accent) !important; }
+
+// Progress spinner
+.mat-mdc-progress-spinner circle,
+.mdc-circular-progress__indeterminate-circle-graphic { stroke: var(--accent) !important; }
+
+// Nav list
+.mat-mdc-list-item { color: var(--text-primary) !important; border-radius: 10px !important; }
+.mat-mdc-list-item:hover { background: var(--glass-hover) !important; }
+
+// Tooltip
+.mdc-tooltip__surface { background: var(--bg-elevated) !important; color: var(--text-bright) !important; }
+
+// Input elements
+input, textarea, select {
+  color: var(--text-primary);
+  background: var(--glass);
+  border-color: var(--glass-border);
+}
+
+// ── Layout Utilities ─────────────────────────────────────────
+.page-container {
+  max-width: 1400px;
+  margin: 0 auto;
+  padding: 28px 24px;
+  position: relative;
+  z-index: 1;
+}
+
+.section-title {
+  font-family: var(--font-latin);
+  font-size: 1.4rem;
+  font-weight: 800;
+  color: var(--text-bright);
+  margin: 0 0 24px;
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  letter-spacing: -0.01em;
+}
+
+.card-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(310px, 1fr));
+  gap: 20px;
+}
+
+// Status color utilities
+.status-good     { color: var(--good); }
+.status-moderate { color: var(--moderate); }
+.status-bad      { color: var(--bad); }
+.bg-good         { background: var(--good-bg); }
+.bg-moderate     { background: var(--moderate-bg); }
+.bg-bad          { background: var(--bad-bg); }
+
+// ── Scrollbar ────────────────────────────────────────────────
+::-webkit-scrollbar { width: 5px; height: 5px; }
+::-webkit-scrollbar-track { background: transparent; }
+::-webkit-scrollbar-thumb { background: rgba(255,255,255,0.11); border-radius: 3px; }
+::-webkit-scrollbar-thumb:hover { background: rgba(255,255,255,0.22); }
+
+// ── Skeleton shimmer — dark variant ─────────────────────────
+@keyframes shimmer {
+  0%   { background-position: -1000px 0; }
+  100% { background-position:  1000px 0; }
+}
+.skeleton {
+  background: linear-gradient(
+    90deg,
+    rgba(255,255,255,0.04) 25%,
+    rgba(255,255,255,0.08) 50%,
+    rgba(255,255,255,0.04) 75%
+  );
+  background-size: 1000px 100%;
+  animation: shimmer 1.8s infinite linear;
+  border-radius: 8px;
+}
+
+// ── Glow animations ──────────────────────────────────────────
+@keyframes pulse-teal {
+  0%, 100% { box-shadow: 0 0 0 2px rgba(0,212,180,0.2); }
+  50%       { box-shadow: 0 0 0 4px rgba(0,212,180,0.08); }
+}
+
+// ── Ionicons global sizing ───────────────────────────────────
+ion-icon {
+  font-size: 20px;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  vertical-align: middle;
+  pointer-events: none;
+}
+// Inside mat-icon-button
+.mat-mdc-icon-button ion-icon { font-size: 22px; }
+// Small variants
+.icon-sm  ion-icon,
+ion-icon.icon-sm  { font-size: 16px; }
+ion-icon.icon-xs  { font-size: 13px; }
+// Form field prefix
+ion-icon[matPrefix] { font-size: 18px; margin-right: 8px; color: rgba(176,200,236,0.50); }
+
+// ── Responsive ───────────────────────────────────────────────
+@media (max-width: 599px) {
+  .page-container { padding: 16px 14px; }
+  .card-grid      { grid-template-columns: 1fr; }
+  .hide-mobile    { display: none !important; }
+}
