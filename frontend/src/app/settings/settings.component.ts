@@ -75,7 +75,7 @@ import { Device } from '../shared/models/device.model';
         </div>
       </mat-card>
 
-      <mat-card class="settings-card">
+      <mat-card class="settings-card" > 
         <h2 class="card-title">ℹ️ เกี่ยวกับแอป</h2>
         <div class="info-rows">
           <div class="info-row"><span class="info-key">ชื่อแอป</span><span class="info-val">Take It Clean</span></div>
